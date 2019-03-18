@@ -16,7 +16,7 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <ng-template [ngIf]="!authService.isAuthenticated()">
+        <ng-template [ngIf]="!(authState | async).isAuthenticated">
           <li>
           <a style="cursor: pointer;" routerLink="/signup">Register</a>
         </li>
@@ -26,11 +26,11 @@
         </li>
         </ng-template>
 
-        <li *ngIf="authService.isAuthenticated()">
+        <li *ngIf="(authState | async).isAuthenticated">
           <a style="cursor: pointer;" (click)="onLogout()">Logout</a>
         </li>
 
-        <li class="dropdown" appDropdown *ngIf="authService.isAuthenticated()">
+        <li class="dropdown" appDropdown *ngIf="(authState | async).isAuthenticated">
           <a class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
 
           <ul class="dropdown-menu">
